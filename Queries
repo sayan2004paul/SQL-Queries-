@@ -1,0 +1,20 @@
+Q1) 
+#  we need to find player with no of gold medals 
+#won by them only for players who won only gold medals.
+
+
+SELECT  
+ GOLD,COUNT(GOLD) AS medals
+  FROM events 
+   WHERE 
+    GOLD  IS NOT NULL 
+     AND GOLD NOT IN (
+    SELECT 
+     SILVER FROM events
+      WHERE SILVER IS NOT NULL
+     
+    ) AND GOLD NOT IN  (SELECT BRONZE FROM events
+     WHERE BRONZE IS NOT NULL)
+  GROUP BY 
+   GOLD
+ 
